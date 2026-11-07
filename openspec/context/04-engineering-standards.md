@@ -37,22 +37,11 @@ updated: 2026-11-04
 # Сборка
 ./mvnw clean package
 
-# Запуск тестов
-./mvnw test
-
 # Запуск приложения
 ./mvnw spring-boot:run
-
-# Docker Compose — полный стек
-docker compose up
 ```
 
-## Docker Compose
-
-- `docker-compose.yml` **обязателен**.
-- Запускает PostgreSQL и KKD Service.
-- Liquibase применяется автоматически при старте Spring Boot.
-- Используется `healthcheck` PostgreSQL с зависимостью `service_healthy`.
+> **Примечание:** Docker Compose и автоматизация развёртывания будут реализованы на финальном этапе разработки.
 
 ## Переменные окружения
 
@@ -64,7 +53,7 @@ docker compose up
 | `DB_USERNAME` | Имя пользователя БД | `kkd` |
 | `DB_PASSWORD` | Пароль БД | `***` |
 
-Файл `.env.example` без реальных паролей — обязателен.
+Файл `.env.example` будет создан на финальном этапе разработки.
 
 ## Логирование
 

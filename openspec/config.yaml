@@ -8,7 +8,7 @@ context: |
   для визуализации метрик и динамики качества данных.
 
   Стек: Java 21, Spring Boot 3.5.16, Maven, PostgreSQL 15+,
-  Spring Data JPA, Liquibase, JUnit 5, Docker Compose.
+  Spring Data JPA, Liquibase (YAML), JUnit 5.
 
   Если описание в openspec/context/_raw/ расходится с актуальным кодом,
   ориентируйся на код, а противоречия выноси на согласование с человеком.

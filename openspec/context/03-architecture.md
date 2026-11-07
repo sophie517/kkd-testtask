@@ -62,6 +62,8 @@ sophie517.testtask.kkd
 |---|---|
 | [ADR/001-validation-engine-separation.md](./ADR/001-validation-engine-separation.md) | Отделение Validation Engine от Spring-зависимостей |
 
-## TBD
+## Принятые решения
 
-- **Хранение каталога правил в БД:** Требуется согласование — хранить ли `Rule` в БД или достаточно фиксированного набора правил в коде.
+| Решение | Описание |
+|---|---|
+| Каталог правил: метаданные в БД, логика в Java | Таблица `kkd_rule` (Liquibase) хранит `code`, `description`, `severity` для справочного доступа. Исполняемая логика — 4 чистых Java-класса в `validation/impl/`. Никакого смешивания. |
