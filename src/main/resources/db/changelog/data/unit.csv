@@ -1,0 +1,4 @@
+id,name,parent_unit_id
+HQ,Организация,NULL
+UNIT-A,Подразделение А,HQ
+UNIT-B,Подразделение Б,HQ

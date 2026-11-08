@@ -1,0 +1,27 @@
+databaseChangeLog:
+- changeSet:
+    id: 003-rule-catalog
+    author: sophie517
+    changes:
+    - loadData:
+        tableName: kkd_rule
+        file: data/kkd_rule.csv
+        relativeToChangelogFile: true
+        encoding: UTF-8
+        columns:
+        - column:
+            header: code
+            name: code
+            type: STRING
+        - column:
+            header: description
+            name: description
+            type: STRING
+        - column:
+            header: severity
+            name: severity
+            type: STRING
+    rollback:
+    - delete:
+        tableName: kkd_rule
+        where: code IN ('GOAL_NO_OWNER', 'GOAL_NO_KR', 'KR_WEIGHTS_SUM', 'CASCADE_NO_PARENT')

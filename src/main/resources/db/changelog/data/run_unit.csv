@@ -1,0 +1,7 @@
+run_id,unit_id,name,parent_unit_id
+RUN-001,HQ,Организация,NULL
+RUN-001,UNIT-A,Подразделение А,HQ
+RUN-001,UNIT-B,Подразделение Б,HQ
+RUN-002,HQ,Организация,NULL
+RUN-002,UNIT-A,Подразделение А,HQ
+RUN-002,UNIT-B,Подразделение Б,HQ

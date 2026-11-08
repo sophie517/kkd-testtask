@@ -1,0 +1,197 @@
+databaseChangeLog:
+- changeSet:
+    id: 004-demo-data
+    author: sophie517
+    changes:
+    - loadData:
+        tableName: unit
+        file: data/unit.csv
+        relativeToChangelogFile: true
+        encoding: UTF-8
+        columns:
+        - column:
+            header: id
+            name: id
+            type: STRING
+        - column:
+            header: name
+            name: name
+            type: STRING
+        - column:
+            header: parent_unit_id
+            name: parent_unit_id
+            type: STRING
+    - loadData:
+        tableName: goal
+        file: data/goal.csv
+        relativeToChangelogFile: true
+        encoding: UTF-8
+        columns:
+        - column:
+            header: id
+            name: id
+            type: STRING
+        - column:
+            header: owner_id
+            name: owner_id
+            type: STRING
+        - column:
+            header: status
+            name: status
+            type: STRING
+        - column:
+            header: deadline
+            name: deadline
+            type: DATE
+        - column:
+            header: unit_id
+            name: unit_id
+            type: STRING
+        - column:
+            header: parent_goal_id
+            name: parent_goal_id
+            type: STRING
+    - loadData:
+        tableName: key_result
+        file: data/key_result.csv
+        relativeToChangelogFile: true
+        encoding: UTF-8
+        columns:
+        - column:
+            header: id
+            name: id
+            type: STRING
+        - column:
+            header: goal_id
+            name: goal_id
+            type: STRING
+        - column:
+            header: target_value
+            name: target_value
+            type: NUMERIC
+        - column:
+            header: actual_value
+            name: actual_value
+            type: NUMERIC
+        - column:
+            header: weight
+            name: weight
+            type: NUMERIC
+        - column:
+            header: actual_update_date
+            name: actual_update_date
+            type: DATE
+    - loadData:
+        tableName: run
+        file: data/run.csv
+        relativeToChangelogFile: true
+        encoding: UTF-8
+        columns:
+        - column:
+            header: id
+            name: id
+            type: STRING
+        - column:
+            header: status
+            name: status
+            type: STRING
+        - column:
+            header: snapshot_date
+            name: snapshot_date
+            type: DATE
+        - column:
+            header: previous_run_id
+            name: previous_run_id
+            type: STRING
+    - loadData:
+        tableName: run_unit
+        file: data/run_unit.csv
+        relativeToChangelogFile: true
+        encoding: UTF-8
+        columns:
+        - column:
+            header: run_id
+            name: run_id
+            type: STRING
+        - column:
+            header: unit_id
+            name: unit_id
+            type: STRING
+        - column:
+            header: name
+            name: name
+            type: STRING
+        - column:
+            header: parent_unit_id
+            name: parent_unit_id
+            type: STRING
+    - loadData:
+        tableName: run_goal
+        file: data/run_goal.csv
+        relativeToChangelogFile: true
+        encoding: UTF-8
+        columns:
+        - column:
+            header: run_id
+            name: run_id
+            type: STRING
+        - column:
+            header: goal_id
+            name: goal_id
+            type: STRING
+        - column:
+            header: unit_id
+            name: unit_id
+            type: STRING
+    - loadData:
+        tableName: issue
+        file: data/issue.csv
+        relativeToChangelogFile: true
+        encoding: UTF-8
+        columns:
+        - column:
+            header: id
+            name: id
+            type: STRING
+        - column:
+            header: run_id
+            name: run_id
+            type: STRING
+        - column:
+            header: rule_code
+            name: rule_code
+            type: STRING
+        - column:
+            header: goal_id
+            name: goal_id
+            type: STRING
+        - column:
+            header: severity
+            name: severity
+            type: STRING
+    rollback:
+    - delete:
+        tableName: run
+        where: id = 'RUN-002'
+    - delete:
+        tableName: run
+        where: id = 'RUN-001'
+    - sql:
+        sql: UPDATE goal SET parent_goal_id = NULL WHERE id IN ('GOAL-001', 'GOAL-002',
+          'GOAL-003', 'GOAL-004', 'GOAL-005', 'GOAL-006', 'GOAL-007', 'GOAL-008',
+          'GOAL-009', 'GOAL-010', 'GOAL-011', 'GOAL-012', 'GOAL-013', 'GOAL-014',
+          'GOAL-015', 'GOAL-016', 'GOAL-017', 'GOAL-018', 'GOAL-019', 'GOAL-020',
+          'GOAL-021', 'GOAL-022', 'GOAL-023', 'GOAL-024');
+    - delete:
+        tableName: goal
+        where: id IN ('GOAL-001', 'GOAL-002', 'GOAL-003', 'GOAL-004', 'GOAL-005',
+          'GOAL-006', 'GOAL-007', 'GOAL-008', 'GOAL-009', 'GOAL-010', 'GOAL-011',
+          'GOAL-012', 'GOAL-013', 'GOAL-014', 'GOAL-015', 'GOAL-016', 'GOAL-017',
+          'GOAL-018', 'GOAL-019', 'GOAL-020', 'GOAL-021', 'GOAL-022', 'GOAL-023',
+          'GOAL-024')
+    - delete:
+        tableName: unit
+        where: id IN ('UNIT-A', 'UNIT-B')
+    - delete:
+        tableName: unit
+        where: id = 'HQ'

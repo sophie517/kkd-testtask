@@ -1,0 +1,3 @@
+id,status,snapshot_date,previous_run_id
+RUN-001,COMPLETED,2026-10-19,NULL
+RUN-002,COMPLETED,2026-10-26,RUN-001

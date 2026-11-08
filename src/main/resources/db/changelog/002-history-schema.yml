@@ -1,0 +1,223 @@
+databaseChangeLog:
+- changeSet:
+    id: 002-history-schema
+    author: sophie517
+    changes:
+    - createTable:
+        tableName: run
+        columns:
+        - column:
+            name: id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+              primaryKey: true
+        - column:
+            name: status
+            type: VARCHAR(20)
+            constraints:
+              nullable: false
+        - column:
+            name: snapshot_date
+            type: DATE
+            constraints:
+              nullable: false
+        - column:
+            name: previous_run_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: true
+    - addForeignKeyConstraint:
+        baseTableName: run
+        baseColumnNames: previous_run_id
+        referencedTableName: run
+        referencedColumnNames: id
+        constraintName: fk_run_previous_run_id
+        onDelete: RESTRICT
+    - sql:
+        sql: ALTER TABLE run ADD CONSTRAINT chk_run_status CHECK (status = 'COMPLETED');
+    - sql:
+        sql: ALTER TABLE run ADD CONSTRAINT chk_run_no_self_previous CHECK (previous_run_id
+          <> id);
+    - createIndex:
+        tableName: run
+        indexName: idx_run_previous_run_id
+        columns:
+        - column:
+            name: previous_run_id
+    - createTable:
+        tableName: run_unit
+        columns:
+        - column:
+            name: run_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+        - column:
+            name: unit_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+        - column:
+            name: name
+            type: VARCHAR(200)
+            constraints:
+              nullable: false
+        - column:
+            name: parent_unit_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: true
+    - addPrimaryKey:
+        tableName: run_unit
+        columnNames: run_id,unit_id
+        constraintName: pk_run_unit
+    - addForeignKeyConstraint:
+        baseTableName: run_unit
+        baseColumnNames: run_id
+        referencedTableName: run
+        referencedColumnNames: id
+        constraintName: fk_run_unit_run_id
+        onDelete: CASCADE
+    - addForeignKeyConstraint:
+        baseTableName: run_unit
+        baseColumnNames: run_id,parent_unit_id
+        referencedTableName: run_unit
+        referencedColumnNames: run_id,unit_id
+        constraintName: fk_run_unit_parent
+        onDelete: NO ACTION
+    - sql:
+        sql: ALTER TABLE run_unit ADD CONSTRAINT chk_run_unit_no_self_parent CHECK
+          (parent_unit_id <> unit_id);
+    - createIndex:
+        tableName: run_unit
+        indexName: idx_run_unit_run_id_parent_unit_id
+        columns:
+        - column:
+            name: run_id
+        - column:
+            name: parent_unit_id
+    - createTable:
+        tableName: run_goal
+        columns:
+        - column:
+            name: run_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+        - column:
+            name: goal_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+        - column:
+            name: unit_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+    - addPrimaryKey:
+        tableName: run_goal
+        columnNames: run_id,goal_id
+        constraintName: pk_run_goal
+    - addForeignKeyConstraint:
+        baseTableName: run_goal
+        baseColumnNames: run_id
+        referencedTableName: run
+        referencedColumnNames: id
+        constraintName: fk_run_goal_run_id
+        onDelete: CASCADE
+    - addForeignKeyConstraint:
+        baseTableName: run_goal
+        baseColumnNames: run_id,unit_id
+        referencedTableName: run_unit
+        referencedColumnNames: run_id,unit_id
+        constraintName: fk_run_goal_unit
+        onDelete: NO ACTION
+    - createIndex:
+        tableName: run_goal
+        indexName: idx_run_goal_run_id_unit_id
+        columns:
+        - column:
+            name: run_id
+        - column:
+            name: unit_id
+    - createTable:
+        tableName: issue
+        columns:
+        - column:
+            name: id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+              primaryKey: true
+        - column:
+            name: run_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+        - column:
+            name: rule_code
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+        - column:
+            name: goal_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+        - column:
+            name: severity
+            type: VARCHAR(20)
+            constraints:
+              nullable: false
+    - addForeignKeyConstraint:
+        baseTableName: issue
+        baseColumnNames: run_id
+        referencedTableName: run
+        referencedColumnNames: id
+        constraintName: fk_issue_run_id
+        onDelete: CASCADE
+    - addForeignKeyConstraint:
+        baseTableName: issue
+        baseColumnNames: rule_code
+        referencedTableName: kkd_rule
+        referencedColumnNames: code
+        constraintName: fk_issue_rule_code
+        onDelete: RESTRICT
+    - addForeignKeyConstraint:
+        baseTableName: issue
+        baseColumnNames: run_id,goal_id
+        referencedTableName: run_goal
+        referencedColumnNames: run_id,goal_id
+        constraintName: fk_issue_run_goal
+        onDelete: CASCADE
+    - addUniqueConstraint:
+        tableName: issue
+        columnNames: run_id,rule_code,goal_id
+        constraintName: uk_issue_run_rule_goal
+    - sql:
+        sql: ALTER TABLE issue ADD CONSTRAINT chk_issue_severity CHECK (severity IN
+          ('critical', 'major', 'minor'));
+    - createIndex:
+        tableName: issue
+        indexName: idx_issue_run_id_goal_id
+        columns:
+        - column:
+            name: run_id
+        - column:
+            name: goal_id
+    - createIndex:
+        tableName: issue
+        indexName: idx_issue_rule_code
+        columns:
+        - column:
+            name: rule_code
+    rollback:
+    - dropTable:
+        tableName: issue
+    - dropTable:
+        tableName: run_goal
+    - dropTable:
+        tableName: run_unit
+    - dropTable:
+        tableName: run

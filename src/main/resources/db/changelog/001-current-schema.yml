@@ -1,0 +1,187 @@
+databaseChangeLog:
+- changeSet:
+    id: 001-current-schema
+    author: sophie517
+    changes:
+    - createTable:
+        tableName: unit
+        columns:
+        - column:
+            name: id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+              primaryKey: true
+        - column:
+            name: name
+            type: VARCHAR(200)
+            constraints:
+              nullable: false
+        - column:
+            name: parent_unit_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: true
+    - addForeignKeyConstraint:
+        baseTableName: unit
+        baseColumnNames: parent_unit_id
+        referencedTableName: unit
+        referencedColumnNames: id
+        constraintName: fk_unit_parent_unit_id
+        onDelete: RESTRICT
+    - sql:
+        sql: ALTER TABLE unit ADD CONSTRAINT chk_unit_no_self_parent CHECK (parent_unit_id
+          <> id);
+    - createIndex:
+        tableName: unit
+        indexName: idx_unit_parent_unit_id
+        columns:
+        - column:
+            name: parent_unit_id
+    - createTable:
+        tableName: goal
+        columns:
+        - column:
+            name: id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+              primaryKey: true
+        - column:
+            name: owner_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: true
+        - column:
+            name: status
+            type: VARCHAR(20)
+            constraints:
+              nullable: false
+        - column:
+            name: deadline
+            type: DATE
+            constraints:
+              nullable: false
+        - column:
+            name: unit_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+        - column:
+            name: parent_goal_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: true
+    - addForeignKeyConstraint:
+        baseTableName: goal
+        baseColumnNames: unit_id
+        referencedTableName: unit
+        referencedColumnNames: id
+        constraintName: fk_goal_unit_id
+        onDelete: RESTRICT
+    - addForeignKeyConstraint:
+        baseTableName: goal
+        baseColumnNames: parent_goal_id
+        referencedTableName: goal
+        referencedColumnNames: id
+        constraintName: fk_goal_parent_goal_id
+        onDelete: RESTRICT
+    - sql:
+        sql: ALTER TABLE goal ADD CONSTRAINT chk_goal_status CHECK (status IN ('ACTIVE',
+          'ARCHIVED'));
+    - sql:
+        sql: ALTER TABLE goal ADD CONSTRAINT chk_goal_no_self_parent CHECK (parent_goal_id
+          <> id);
+    - createIndex:
+        tableName: goal
+        indexName: idx_goal_unit_id
+        columns:
+        - column:
+            name: unit_id
+    - createIndex:
+        tableName: goal
+        indexName: idx_goal_parent_goal_id
+        columns:
+        - column:
+            name: parent_goal_id
+    - createTable:
+        tableName: key_result
+        columns:
+        - column:
+            name: id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+              primaryKey: true
+        - column:
+            name: goal_id
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+        - column:
+            name: target_value
+            type: NUMERIC(19,2)
+            constraints:
+              nullable: true
+        - column:
+            name: actual_value
+            type: NUMERIC(19,2)
+            constraints:
+              nullable: true
+        - column:
+            name: weight
+            type: NUMERIC(10,2)
+            constraints:
+              nullable: false
+        - column:
+            name: actual_update_date
+            type: DATE
+            constraints:
+              nullable: true
+    - addForeignKeyConstraint:
+        baseTableName: key_result
+        baseColumnNames: goal_id
+        referencedTableName: goal
+        referencedColumnNames: id
+        constraintName: fk_key_result_goal_id
+        onDelete: CASCADE
+    - sql:
+        sql: ALTER TABLE key_result ADD CONSTRAINT chk_key_result_weight CHECK (weight
+          >= 0);
+    - createIndex:
+        tableName: key_result
+        indexName: idx_key_result_goal_id
+        columns:
+        - column:
+            name: goal_id
+    - createTable:
+        tableName: kkd_rule
+        columns:
+        - column:
+            name: code
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+              primaryKey: true
+        - column:
+            name: description
+            type: VARCHAR(500)
+            constraints:
+              nullable: false
+        - column:
+            name: severity
+            type: VARCHAR(20)
+            constraints:
+              nullable: false
+    - sql:
+        sql: ALTER TABLE kkd_rule ADD CONSTRAINT chk_rule_severity CHECK (severity
+          IN ('critical', 'major', 'minor'));
+    rollback:
+    - dropTable:
+        tableName: kkd_rule
+    - dropTable:
+        tableName: key_result
+    - dropTable:
+        tableName: goal
+    - dropTable:
+        tableName: unit

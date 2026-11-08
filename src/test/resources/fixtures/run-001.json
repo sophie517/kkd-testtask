@@ -1,0 +1,585 @@
+{
+  "runId": "RUN-001",
+  "snapshotDate": "2026-10-19",
+  "previousRunId": null,
+  "units": [
+    {
+      "id": "HQ",
+      "name": "Организация",
+      "parentUnitId": null
+    },
+    {
+      "id": "UNIT-A",
+      "name": "Подразделение А",
+      "parentUnitId": "HQ"
+    },
+    {
+      "id": "UNIT-B",
+      "name": "Подразделение Б",
+      "parentUnitId": "HQ"
+    }
+  ],
+  "goals": [
+    {
+      "id": "GOAL-001",
+      "ownerId": null,
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "HQ",
+      "parentGoalId": null
+    },
+    {
+      "id": "GOAL-002",
+      "ownerId": "EMP-002",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "HQ",
+      "parentGoalId": null
+    },
+    {
+      "id": "GOAL-003",
+      "ownerId": "EMP-003",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "HQ",
+      "parentGoalId": null
+    },
+    {
+      "id": "GOAL-004",
+      "ownerId": "EMP-004",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "HQ",
+      "parentGoalId": null
+    },
+    {
+      "id": "GOAL-005",
+      "ownerId": "EMP-005",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "HQ",
+      "parentGoalId": null
+    },
+    {
+      "id": "GOAL-006",
+      "ownerId": "EMP-006",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "HQ",
+      "parentGoalId": null
+    },
+    {
+      "id": "GOAL-007",
+      "ownerId": "EMP-007",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "HQ",
+      "parentGoalId": null
+    },
+    {
+      "id": "GOAL-008",
+      "ownerId": null,
+      "status": "ARCHIVED",
+      "deadline": "2026-12-31",
+      "unitId": "HQ",
+      "parentGoalId": null
+    },
+    {
+      "id": "GOAL-009",
+      "ownerId": "EMP-009",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-A",
+      "parentGoalId": "GOAL-001"
+    },
+    {
+      "id": "GOAL-010",
+      "ownerId": "EMP-010",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-A",
+      "parentGoalId": "GOAL-001"
+    },
+    {
+      "id": "GOAL-011",
+      "ownerId": "EMP-011",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-A",
+      "parentGoalId": "GOAL-001"
+    },
+    {
+      "id": "GOAL-012",
+      "ownerId": "EMP-012",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-A",
+      "parentGoalId": "GOAL-001"
+    },
+    {
+      "id": "GOAL-013",
+      "ownerId": "EMP-013",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-A",
+      "parentGoalId": "GOAL-001"
+    },
+    {
+      "id": "GOAL-014",
+      "ownerId": "EMP-014",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-A",
+      "parentGoalId": "GOAL-001"
+    },
+    {
+      "id": "GOAL-015",
+      "ownerId": "EMP-015",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-A",
+      "parentGoalId": "GOAL-001"
+    },
+    {
+      "id": "GOAL-016",
+      "ownerId": null,
+      "status": "ARCHIVED",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-A",
+      "parentGoalId": null
+    },
+    {
+      "id": "GOAL-017",
+      "ownerId": "EMP-017",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-B",
+      "parentGoalId": null
+    },
+    {
+      "id": "GOAL-018",
+      "ownerId": null,
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-B",
+      "parentGoalId": "GOAL-002"
+    },
+    {
+      "id": "GOAL-019",
+      "ownerId": "EMP-019",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-B",
+      "parentGoalId": "GOAL-002"
+    },
+    {
+      "id": "GOAL-020",
+      "ownerId": "EMP-020",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-B",
+      "parentGoalId": "GOAL-009"
+    },
+    {
+      "id": "GOAL-021",
+      "ownerId": "EMP-021",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-B",
+      "parentGoalId": "GOAL-008"
+    },
+    {
+      "id": "GOAL-022",
+      "ownerId": "EMP-022",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-B",
+      "parentGoalId": "GOAL-002"
+    },
+    {
+      "id": "GOAL-023",
+      "ownerId": "EMP-023",
+      "status": "ACTIVE",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-B",
+      "parentGoalId": "GOAL-002"
+    },
+    {
+      "id": "GOAL-024",
+      "ownerId": null,
+      "status": "ARCHIVED",
+      "deadline": "2026-12-31",
+      "unitId": "UNIT-B",
+      "parentGoalId": null
+    }
+  ],
+  "keyResults": [
+    {
+      "id": "KR-001-1",
+      "goalId": "GOAL-001",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-001-2",
+      "goalId": "GOAL-001",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-002-1",
+      "goalId": "GOAL-002",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-002-2",
+      "goalId": "GOAL-002",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-003-1",
+      "goalId": "GOAL-003",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-003-2",
+      "goalId": "GOAL-003",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-004-1",
+      "goalId": "GOAL-004",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-004-2",
+      "goalId": "GOAL-004",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-005-1",
+      "goalId": "GOAL-005",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-005-2",
+      "goalId": "GOAL-005",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-006-1",
+      "goalId": "GOAL-006",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-006-2",
+      "goalId": "GOAL-006",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-007-1",
+      "goalId": "GOAL-007",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-007-2",
+      "goalId": "GOAL-007",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-010-1",
+      "goalId": "GOAL-010",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "33.33",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-010-2",
+      "goalId": "GOAL-010",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "66.66",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-011-1",
+      "goalId": "GOAL-011",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-011-2",
+      "goalId": "GOAL-011",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-012-1",
+      "goalId": "GOAL-012",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-012-2",
+      "goalId": "GOAL-012",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-013-1",
+      "goalId": "GOAL-013",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-013-2",
+      "goalId": "GOAL-013",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-014-1",
+      "goalId": "GOAL-014",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-014-2",
+      "goalId": "GOAL-014",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-015-1",
+      "goalId": "GOAL-015",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-015-2",
+      "goalId": "GOAL-015",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-017-1",
+      "goalId": "GOAL-017",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-017-2",
+      "goalId": "GOAL-017",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-018-1",
+      "goalId": "GOAL-018",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-018-2",
+      "goalId": "GOAL-018",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "49.99",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-019-1",
+      "goalId": "GOAL-019",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-019-2",
+      "goalId": "GOAL-019",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "51.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-020-1",
+      "goalId": "GOAL-020",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-020-2",
+      "goalId": "GOAL-020",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-021-1",
+      "goalId": "GOAL-021",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-021-2",
+      "goalId": "GOAL-021",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-022-1",
+      "goalId": "GOAL-022",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-022-2",
+      "goalId": "GOAL-022",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-023-1",
+      "goalId": "GOAL-023",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    },
+    {
+      "id": "KR-023-2",
+      "goalId": "GOAL-023",
+      "targetValue": "100.00",
+      "actualValue": "60.00",
+      "weight": "50.00",
+      "actualUpdateDate": "2026-10-19"
+    }
+  ],
+  "expectedIssues": [
+    {
+      "ruleCode": "CASCADE_NO_PARENT",
+      "goalId": "GOAL-017",
+      "severity": "major"
+    },
+    {
+      "ruleCode": "CASCADE_NO_PARENT",
+      "goalId": "GOAL-020",
+      "severity": "major"
+    },
+    {
+      "ruleCode": "CASCADE_NO_PARENT",
+      "goalId": "GOAL-021",
+      "severity": "major"
+    },
+    {
+      "ruleCode": "GOAL_NO_KR",
+      "goalId": "GOAL-009",
+      "severity": "critical"
+    },
+    {
+      "ruleCode": "GOAL_NO_OWNER",
+      "goalId": "GOAL-001",
+      "severity": "critical"
+    },
+    {
+      "ruleCode": "GOAL_NO_OWNER",
+      "goalId": "GOAL-018",
+      "severity": "critical"
+    },
+    {
+      "ruleCode": "KR_WEIGHTS_SUM",
+      "goalId": "GOAL-010",
+      "severity": "major"
+    },
+    {
+      "ruleCode": "KR_WEIGHTS_SUM",
+      "goalId": "GOAL-018",
+      "severity": "major"
+    },
+    {
+      "ruleCode": "KR_WEIGHTS_SUM",
+      "goalId": "GOAL-019",
+      "severity": "major"
+    }
+  ]
+}

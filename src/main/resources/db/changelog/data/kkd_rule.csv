@@ -1,0 +1,5 @@
+code,description,severity
+GOAL_NO_OWNER,Цель без ответственного,critical
+GOAL_NO_KR,Активная цель без ключевых результатов,critical
+KR_WEIGHTS_SUM,Сумма весов ключевых результатов не равна 100%,major
+CASCADE_NO_PARENT,Цель не связана с активной целью непосредственного вышестоящего подразделения,major

@@ -1,0 +1,109 @@
+# KKD Service
+
+Сервис контроля качества целей и ключевых результатов: Java 21, Spring Boot 3,
+PostgreSQL 15, Liquibase, Maven, Lombok и Swagger UI.
+Демо содержит 24 цели, 3 подразделения, 40 КР и два прогона с 9 и 8 проблемами.
+
+## Запуск
+
+Нужны Docker и Docker Compose. Из корня проекта:
+
+```bash
+docker compose up --build
+```
+
+Приложение доступно на `http://localhost:8080`, PostgreSQL — `localhost:5432`.
+Compose дождётся готовности БД; приложение применит миграции и загрузит демо.
+Демонстрационные настройки: база `kkd_db`, пользователь `kkd`, пароль `kkd`.
+Остановить стенд: `docker compose down` — данные сохранятся в volume.
+
+Если порты заняты:
+
+```bash
+APP_PORT=18090 DB_PORT=15440 docker compose up --build
+```
+
+Реквизиты можно изменить через DB_USERNAME/DB_PASSWORD в окружении или `.env`.
+Они задаются при первом создании БД; смена `.env` не меняет пароль существующей БД.
+
+## Swagger и API
+
+Откройте [Swagger UI](http://localhost:8080/swagger-ui/index.html): там описаны
+параметры и ответы, запросы можно выполнить через **Try it out**.
+OpenAPI JSON: [GET /v3/api-docs](http://localhost:8080/v3/api-docs).
+
+| Метод | Маршрут | Назначение |
+|---|---|---|
+| GET | `/api/runs` | Список прогонов |
+| GET | `/api/kkd/summary?run_id=RUN-002&unit_id=HQ` | Метрики и дельта |
+| GET | `/api/kkd/issues?run_id=RUN-002` | Проблемы, фильтры и пагинация |
+
+```bash
+curl -sS 'http://localhost:8080/api/kkd/summary?run_id=RUN-002&unit_id=HQ'
+```
+
+Ожидается 66.7% корректных целей (было 61.9%), 7 проблемных целей, 8 проблем;
+дельта: 4 новых, 4 сохраняющихся, 5 исправленных. У первого прогона сравнение — null.
+Неизвестные прогон/подразделение дают 404, неверные параметры — 422;
+формат ошибки: `{"error":{"code":"...","message":"..."}}`.
+Подробнее: [контракт API](docs/api.md).
+
+## Локальный запуск и тесты
+
+Нужен JDK 21; Maven скачает Wrapper. Для локального запуска можно поднять только БД:
+
+```bash
+DB_PORT=15440 DB_USERNAME=kkd DB_PASSWORD=kkd docker compose up -d --wait db
+export DB_URL=jdbc:postgresql://localhost:15440/kkd_db
+export DB_USERNAME=kkd
+export DB_PASSWORD=kkd
+./mvnw spring-boot:run
+```
+
+Для своей PostgreSQL 15+ создайте отдельную БД и задайте её URL/реквизиты.
+Spring Boot не читает `.env` автоматически: экспортируйте переменные или задайте их в IDE.
+Шаблон — [.env.example](.env.example). Порт Java задаётся через SERVER_PORT (по умолчанию 8080).
+
+## Проверка накат → откат → повторный накат
+
+JUnit-класс [MigrationCycleTests](src/test/java/sophie517/testtask/kkd/domain/MigrationCycleTests.java)
+вызывает Liquibase через Java API. Для доступной PostgreSQL:
+
+```bash
+KKD_MIGRATION_TESTS=true \
+  MIGRATION_DB_URL=jdbc:postgresql://localhost:15440/kkd \
+  MIGRATION_DB_USERNAME=kkd MIGRATION_DB_PASSWORD=change-me \
+  ./mvnw -Dtest=MigrationCycleTests test
+```
+
+Тест создаёт уникальную схему, проверяет update, повторный update без дублей,
+rollback четырёх changeSet и новый update. Сравнивает все строки демо, столбцы,
+ограничения и индексы; затем удаляет свою схему. Пользователю БД нужно право CREATE.
+Без флага тест пропускается. Установка Liquibase CLI не нужна.
+Ручные команды CLI приведены отдельно: [проверка миграций](docs/migrations.md).
+
+## Архитектура
+
+`KkdController` → сервисы `application/service` → репозитории `domain/repository`.
+JPA-сущности находятся в `domain/model`, отдельные API DTO — в `api/dto`.
+Lombok генерирует геттеры и конструкторы; DTO и входные данные используют records.
+
+Четыре правила живут в [validation](src/main/java/sophie517/testtask/kkd/validation/):
+нет владельца, нет КР, сумма весов не равна 100%, нет подходящей родительской цели.
+Они проверяют только активные цели, не обращаются к Spring/HTTP/БД.
+`RunService.start` вызывает движок и сохраняет прогон со снимками одной транзакцией
+REPEATABLE_READ. Публичного запуска и планировщика нет; демо создаёт Liquibase.
+
+`SummaryCalculator` читает исторические снимки подразделения вместе с потомками:
+`N` — активные цели, `B` — различные цели с проблемами, `I` — все проблемы.
+Метрики: доля корректных целей `(N − B) × 100 / N`, число проблемных целей `B`
+и число проблем `I`. При N=0 доля равна 0.0%; округление — BigDecimal/HALF_UP
+до одного знака. Дельта метрики равна value − previous, trend — better/worse/neutral.
+
+`IssueDeltaCalculator` сравнивает множества `(rule_code, goal_id)`: только текущие —
+new, общие — persisting, только прошлые — resolved. Предшественник задан явно.
+Поддеревья определяются отдельно по снимкам; текущие изменения целей не меняют историю.
+При отсутствии предыдущей истории значения сравнения равны null.
+
+[Модель данных](docs/domain-model.md) · [Результаты проверок](docs/verification.md) ·
+[Работа с ассистентом](AI-PLAN.md) · [Этапы OpenSpec](openspec/context/08-delivery-stages.md)

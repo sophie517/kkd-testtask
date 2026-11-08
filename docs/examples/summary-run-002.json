@@ -1,0 +1,60 @@
+{
+  "run" : {
+    "id" : "RUN-002",
+    "snapshot_date" : "2026-10-26"
+  },
+  "compared_to" : {
+    "id" : "RUN-001",
+    "snapshot_date" : "2026-10-19"
+  },
+  "unit" : {
+    "id" : "HQ",
+    "name" : "Организация"
+  },
+  "metrics" : [ {
+    "key" : "clean_goals_share",
+    "title" : "Доля корректных целей",
+    "unit" : "%",
+    "value" : 66.7,
+    "previous" : 61.9,
+    "delta" : 4.8,
+    "trend" : "better"
+  }, {
+    "key" : "goals_with_issues_count",
+    "title" : "Количество целей с проблемами",
+    "unit" : "count",
+    "value" : 7,
+    "previous" : 8,
+    "delta" : -1,
+    "trend" : "better"
+  }, {
+    "key" : "issues_count",
+    "title" : "Количество проблем",
+    "unit" : "count",
+    "value" : 8,
+    "previous" : 9,
+    "delta" : -1,
+    "trend" : "better"
+  } ],
+  "issues_by_severity" : [ {
+    "code" : "critical",
+    "current" : 3,
+    "previous" : 3,
+    "delta" : 0
+  }, {
+    "code" : "major",
+    "current" : 5,
+    "previous" : 6,
+    "delta" : -1
+  }, {
+    "code" : "minor",
+    "current" : 0,
+    "previous" : 0,
+    "delta" : 0
+  } ],
+  "delta" : {
+    "new" : 4,
+    "persisting" : 4,
+    "resolved" : 5
+  }
+}

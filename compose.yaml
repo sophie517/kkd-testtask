@@ -1,0 +1,37 @@
+name: kkd-service
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: kkd_db
+      POSTGRES_USER: ${DB_USERNAME:-kkd}
+      # Local demo default; override through .env or the shell.
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-change-me}
+    ports:
+      - "127.0.0.1:${DB_PORT:-5432}:5432"
+    volumes:
+      - kkd-foundation-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+
+  kkd-service:
+    image: kkd-service:local
+    build:
+      context: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/kkd_db
+      DB_USERNAME: ${DB_USERNAME:-kkd}
+      DB_PASSWORD: ${DB_PASSWORD:-kkd}
+    ports:
+      - "127.0.0.1:${APP_PORT:-8080}:8080"
+
+volumes:
+  kkd-foundation-db-data:
